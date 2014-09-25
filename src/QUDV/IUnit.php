@@ -14,8 +14,8 @@ namespace QUDV;
  */
 interface IUnit {
     public function id();
-    public function same();
-    public function name(IUnit $unit);
+    public function same(IUnit $unit);
+    public function name();
     public function symbol();
     public function description();
 }
