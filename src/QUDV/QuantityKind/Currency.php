@@ -1,11 +1,6 @@
 <?php
 namespace QUDV\QuantityKind;
-
-/**
- * Description of Currency
- *
- * @author anru
- */
+use QUDV\IQuantityKind;
 class Currency implements IQuantityKind
 {
     public function name(){

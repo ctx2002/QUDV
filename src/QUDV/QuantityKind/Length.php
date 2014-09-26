@@ -1,12 +1,12 @@
 <?php
 namespace QUDV\QuantityKind;
-use QUDV\QuantityKind;
+use QUDV\IQuantityKind;
 /**
  * Description of Length
  *
  * @author anru
  */
-class Length implements QuantityKind
+class Length implements IQuantityKind
 {
     public function name(){
         return "length";

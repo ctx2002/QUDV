@@ -7,7 +7,7 @@
  */
 
 namespace QUDV\QuantityKind;
-
+use QUDV\IQuantityKind;
 /**
  * Description of Cent
  *

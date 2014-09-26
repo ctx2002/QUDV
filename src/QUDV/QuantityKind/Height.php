@@ -1,8 +1,8 @@
 <?php
 namespace QUDV\QuantityKind;
-use QUDV\QuantityKind;
+use QUDV\IQuantityKind;
 
-class Height implements \QUDV\QuantityKind
+class Height implements IQuantityKind
 {
     public function name(){
         return "height";

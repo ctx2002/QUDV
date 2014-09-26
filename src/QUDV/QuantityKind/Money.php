@@ -1,6 +1,6 @@
 <?php
 namespace QUDV\QuantityKind;
-
+use QUDV\IQuantityKind;
 class Money implements IQuantityKind
 {
 
