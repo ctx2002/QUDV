@@ -6,10 +6,11 @@ use QUDV\Exception\NotSameType;
 abstract class Money {
 
     private $value;
-
-    public function __construct($number)
+    private $scale;
+    public function __construct($number,$scale = 2)
     {
         $this->value = $number;
+        $this->scale = $scale;
     }
 
     public function getValue()
@@ -20,7 +21,7 @@ abstract class Money {
     protected function calculate($bcmathFunc,Money $leftOperand, Money $rightOperand)
     {
         if ($leftOperand->same($rightOperand)) {
-            return call_user_func($bcmathFunc,$leftOperand->getValue(),$rightOperand->getValue(),2);
+            return call_user_func($bcmathFunc,$leftOperand->getValue(),$rightOperand->getValue(),$this->scale);
         }
         throw new NotSameType("left : " . $leftOperand . " , right: ".$rightOperand );
     }
