@@ -1,7 +1,5 @@
 <?php
-
 namespace QUDV\Quantity;
-use QUDV\Exception\NotSameType;
 
 abstract class Money {
 
