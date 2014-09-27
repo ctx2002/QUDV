@@ -61,7 +61,7 @@ class NZDTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new NZD(1.25);
         $v = $this->object->add($obj);
-        $this->assertEquals(2.5, $v);
+        $this->assertEquals(2.5, $v->getValue());
 
     }
 }

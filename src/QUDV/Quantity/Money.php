@@ -25,24 +25,6 @@ abstract class Money {
         throw new NotSameType("left : " . $leftOperand . " , right: ".$rightOperand );
     }
 
-    public function add(Money $money)
-    {
-        return $this->calculate("bcadd", $this, $money);
-    }
-
-    public function minus(Money $money) {
-
-        return $this->calculate("bcsub", $this, $money);
-    }
-
-    public function multiply(Money $money) {
-        return $this->calculate("bcmul", $this, $money);
-    }
-
-    public function divide(Money $money) {
-        return $this->calculate("bcdiv", $this, $money);
-    }
-
     public function same(Money $money)
     {
         if ($this->unit()->same($money->unit()  )) {
@@ -62,4 +44,8 @@ abstract class Money {
 
     abstract public function unit();
     abstract public function quantityKind();
+    abstract public function add(Money $money);
+    abstract public function minus(Money $money) ;
+    abstract public function multiply(Money $money);
+    abstract public function divide(Money $money);
 }
