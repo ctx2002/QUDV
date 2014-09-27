@@ -13,25 +13,27 @@ class AUD extends Money {
         return new \QUDV\QuantityKind\Money();
     }
 
-    public function add(Money $money)
+    public function add(AUD $money)
     {
-        $v = $this->calculate("bcadd", $this, $money);
+        $v = bcadd($this->getValue(),$money->getValue(),$this->scale);
         return new \QUDV\Quantity\AUD($v);
     }
 
-    public function minus(Money $money) {
-
-        $v = $this->calculate("bcsub", $this, $money);
+    public function minus(AUD $money)
+    {
+        $v = bcsub($this->getValue(),$money->getValue(),$this->scale);
         return new \QUDV\Quantity\AUD($v);
     }
 
-    public function multiply(Money $money) {
-        $v = $this->calculate("bcmul", $this, $money);
+    public function multiply(AUD $money)
+    {
+        $v = bcmul($this->getValue(),$money->getValue(),$this->scale);
         return new \QUDV\Quantity\AUD($v);
     }
 
-    public function divide(Money $money) {
-        $v= $this->calculate("bcdiv", $this, $money);
+    public function divide(AUD $money)
+    {
+        $v = bcdiv($this->getValue(),$money->getValue(),$this->scale);
         return new \QUDV\Quantity\AUD($v);
     }
 
