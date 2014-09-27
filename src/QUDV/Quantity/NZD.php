@@ -10,6 +10,6 @@ class NZD extends Money {
 
     public function quantityKind()
     {
-        return new \QUDV\QualityKind\Money();
+        return new \QUDV\QuantityKind\Money();
     }
 }
