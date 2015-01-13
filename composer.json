@@ -1,10 +1,4 @@
 {
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/ctx2002/QUDV"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "QUDV\\":        "src/"
