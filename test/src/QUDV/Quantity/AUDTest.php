@@ -62,8 +62,14 @@ class AUDTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdd()
     {
-         $v = $this->object->add(new AUD(5));
-         $this->assertEquals($v->getValue(), 10.12);
+        $v = $this->object->add(new AUD(5));
+        $this->assertEquals($v->getValue(), 10.12);
+    }
+
+    public function testReturnType()
+    {
+        $v = $this->object->add(new AUD(5));
+        $this->assertInstanceOf("\QUDV\Quantity\AUD", $v);
     }
 
     /**
