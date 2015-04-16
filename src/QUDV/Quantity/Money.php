@@ -74,15 +74,15 @@ abstract class Money {
         return $this->calculate($value, $this);
     }
 
-    /*public function divide(Money $money)
+    public function divide($denominator)
     {
         $value = bcdiv($this->getValue(), $money->getValue(), $this->scale);
         return $this->calculate($value, $money);
-    }*/
+    }
     /**
      * http://martinfowler.com/eaaDev/quantity.html
      * **/
-    public function divide($denominator)
+    public function divideAndSpread($denominator)
     {
         $result = new \SplFixedArray($denominator);
 

@@ -100,9 +100,9 @@ class AUDTest extends \PHPUnit_Framework_TestCase
      * @covers QUDV\Quantity\AUD::divide
      * @todo   Implement testDivide().
      */
-    public function testDivide()
+    public function testDivideAndSpread()
     {
-        $result = $this->object->divide(133,30);
+        $result = $this->object->divideAndSpread(133,30);
         $total = new AUD(0);
         foreach ($result as $value) {
             $init = $value->add($total);
