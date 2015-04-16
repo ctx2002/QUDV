@@ -102,9 +102,12 @@ class AUDTest extends \PHPUnit_Framework_TestCase
      */
     public function testDivide()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $result = $this->object->divide(133,30);
+        $total = new AUD(0);
+        foreach ($result as $value) {
+            $init = $value->add($total);
+            $total = $init;
+        }
+        $this->assertEquals(5.12, $total->getValue());
     }
 }
