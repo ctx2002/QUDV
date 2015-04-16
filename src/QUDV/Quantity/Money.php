@@ -49,7 +49,10 @@ abstract class Money {
         }
         if ($this->same($otherMoney)) {
             $class = get_class($this);
-            return new $class($value);
+            return new $class($value,$this->scale);
+        } else {
+            new \QUDV\Exception\NotSameType($this->unit()->id() . "is not same as".
+                    $otherMoney->unit()->id());
         }
     }
 
@@ -65,16 +68,57 @@ abstract class Money {
         return $this->calculate($value, $money);
     }
 
-    public function multiply(Money $money)
+    public function multiply($multiplier)
     {
-        $vlue = bcmul($this->getValue(), $money->getValue(), $this->scale);
-        return $this->calculate($value, $money);
+        $value = bcmul($this->getValue(), $multiplier, $this->scale);
+        return $this->calculate($value, $this);
     }
 
-    public function divide(Money $money)
+    /*public function divide(Money $money)
     {
         $value = bcdiv($this->getValue(), $money->getValue(), $this->scale);
         return $this->calculate($value, $money);
+    }*/
+    /**
+     * http://martinfowler.com/eaaDev/quantity.html
+     * **/
+    public function divide($denominator)
+    {
+        $result = new \SplFixedArray($denominator);
+
+        $simpleResult = bcdiv($this->getValue(), $denominator, $this->scale);
+
+        $class = get_class($this);
+        for ($i = 0; $i < $denominator ; $i++)
+        {
+            $result[$i] = new $class($simpleResult,$this->scale);
+        }
+
+
+        $m = bcmul($simpleResult,$denominator,$this->scale);
+        $remainderStr = bcsub($this->getValue(), $m, $this->scale);
+
+        /****
+         * if scale is 2, then remainder is 0.xx,2 decimal
+         * if scale is 3, then remainder is 0.xxx, 3 decimal
+         * so to return nearest int for remainder,for scale 2 we have to
+         * multiply 100, for scale 3, we have to multiply 1000
+         * ***
+         */
+        $multiply = 10;
+        for ($i = 0; $i < $this->scale-1; $i++)
+        {
+            $multiply = $multiply * 10;
+        }
+
+        $midvalue = doubleval($remainderStr);
+        $remainder = ($midvalue * $multiply);
+
+        for ($i=0; $i < $remainder ; $i++)
+        {
+            $result[$i] = $result[$i]->add(new $class(1/$multiply));
+        }
+        return $result;
     }
 
 }
