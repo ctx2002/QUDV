@@ -17,7 +17,7 @@ class AUDTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new AUD(5.12);
+        $this->object = new AUD("5.12");
     }
 
     /**
@@ -109,5 +109,13 @@ class AUDTest extends \PHPUnit_Framework_TestCase
             $total = $init;
         }
         $this->assertEquals(5.12, $total->getValue());
+    }
+
+    public function testCompare()
+    {
+        $aud = new AUD("5.12");
+        $r = $aud->compare($this->object);
+        $this->assertEquals(0, $r);
+
     }
 }

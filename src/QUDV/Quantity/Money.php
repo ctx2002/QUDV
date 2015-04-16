@@ -15,7 +15,7 @@ abstract class Money {
      * @param $scale integer default is 2
      * ****/
     public function __construct($number, $scale = 2) {
-        $this->value = $number;
+        $this->value = (string)$number;
         $this->scale = $scale;
     }
 
@@ -119,6 +119,16 @@ abstract class Money {
             $result[$i] = $result[$i]->add(new $class(1/$multiply));
         }
         return $result;
+    }
+
+    /***
+     * 0 is equal, -1 is less, 1 is bigger
+     * ***/
+    public function compare(Money $money)
+    {
+        if ($this->same($money)) {
+            return bccomp($this->getValue(), $money->getValue() , $this->scale);
+        }
     }
 
 }
