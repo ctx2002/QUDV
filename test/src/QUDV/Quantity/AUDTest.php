@@ -63,7 +63,7 @@ class AUDTest extends \PHPUnit_Framework_TestCase
     public function testAdd()
     {
         $v = $this->object->add(new AUD(5));
-        $this->assertEquals($v->getValue(), 10.12);
+        $this->assertEquals($v->getValue(), "10.12");
     }
 
     public function testReturnType()
@@ -102,13 +102,15 @@ class AUDTest extends \PHPUnit_Framework_TestCase
      */
     public function testDivideAndSpread()
     {
-        $result = $this->object->divideAndSpread(133,30);
+        $result = $this->object->divideAndSpread(133);
+
         $total = new AUD(0);
         foreach ($result as $value) {
             $init = $value->add($total);
             $total = $init;
         }
-        $this->assertEquals(5.12, $total->getValue());
+
+        $this->assertEquals("5.12", $total->getValue());
     }
 
     public function testCompare()

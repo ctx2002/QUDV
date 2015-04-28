@@ -1,8 +1,7 @@
-<?php
+<?php namespace QUDV\Quantity;
 
-namespace QUDV\Quantity;
-
-abstract class Money {
+abstract class Money
+{
 
     /**
      * @var string $value is a string, since it a result of bc math library
@@ -11,29 +10,34 @@ abstract class Money {
     protected $scale;
 
     /**
-     * @param $number string
-     * @param $scale integer default is 2
+     * @param string $number
+     * @param int    $scale  default is 2
      * ****/
-    public function __construct($number, $scale = 2) {
+    public function __construct($number, $scale = 2)
+    {
         $this->value = (string)$number;
         $this->scale = $scale;
     }
 
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 
-    public function same(Money $money) {
+    public function same(Money $money)
+    {
+        $b = FALSE;
         if ($this->unit()->same($money->unit())) {
             if ($this->quantityKind()->same($money->quantityKind())) {
-                return true;
+                $b = TRUE;
             }
         }
 
-        return false;
+        return $b;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return "{value: [" . $this->getValue() . " ] , unit: [" . $this->unit()->id() . "],"
                 . "quantity kind: [" . $this->quantityKind()->id() . "]}";
     }
@@ -59,7 +63,7 @@ abstract class Money {
     public function add(Money $money)
     {
         $value = bcadd($this->getValue(), $money->getValue(), $this->scale);
-        return $this->calculate($value,$money);
+        return $this->calculate($value, $money);
     }
 
     public function minus(Money $money)
@@ -76,8 +80,8 @@ abstract class Money {
 
     public function divide($denominator)
     {
-        $value = bcdiv($this->getValue(), $money->getValue(), $this->scale);
-        return $this->calculate($value, $money);
+        $value = bcdiv($this->getValue(), $denominator, $this->scale);
+        return $this->calculate($value, $this);
     }
     /**
      * http://martinfowler.com/eaaDev/quantity.html
@@ -89,13 +93,12 @@ abstract class Money {
         $simpleResult = bcdiv($this->getValue(), $denominator, $this->scale);
 
         $class = get_class($this);
-        for ($i = 0; $i < $denominator ; $i++)
-        {
-            $result[$i] = new $class($simpleResult,$this->scale);
+        for ($i = 0; $i < $denominator; $i++) {
+            $result[$i] = new $class($simpleResult, $this->scale);
         }
 
 
-        $m = bcmul($simpleResult,$denominator,$this->scale);
+        $m = bcmul($simpleResult, $denominator, $this->scale);
         $remainderStr = bcsub($this->getValue(), $m, $this->scale);
 
         /****
@@ -106,16 +109,14 @@ abstract class Money {
          * ***
          */
         $multiply = 10;
-        for ($i = 0; $i < $this->scale-1; $i++)
-        {
+        for ($i = 0; $i < $this->scale-1; $i++) {
             $multiply = $multiply * 10;
         }
 
         $midvalue = doubleval($remainderStr);
         $remainder = ($midvalue * $multiply);
 
-        for ($i=0; $i < $remainder ; $i++)
-        {
+        for ($i=0; $i < $remainder; $i++) {
             $result[$i] = $result[$i]->add(new $class(1/$multiply));
         }
         return $result;
@@ -127,7 +128,7 @@ abstract class Money {
     public function compare(Money $money)
     {
         if ($this->same($money)) {
-            return bccomp($this->getValue(), $money->getValue() , $this->scale);
+            return bccomp($this->getValue(), $money->getValue(), $this->scale);
         }
     }
 
