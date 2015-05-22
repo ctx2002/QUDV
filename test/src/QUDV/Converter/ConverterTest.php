@@ -17,7 +17,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Converter;
+        //$this->object = new Converter;
     }
 
     /**
