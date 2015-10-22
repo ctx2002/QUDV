@@ -89,18 +89,28 @@ abstract class Money
     public function divideAndSpread($denominator)
     {
         $result = new \SplFixedArray($denominator);
-
+        
+        //simple div, which results a double value.
+        //dividend / divisor = quotient
         $simpleResult = bcdiv($this->getValue(), $denominator, $this->scale);
-
         $class = get_class($this);
+        
+        //spread values, each result contains a quotient
+        //when adding back those result/quotient, sum will smaller than
+        // orignal value.
         for ($i = 0; $i < $denominator; $i++) {
             $result[$i] = new $class($simpleResult, $this->scale);
         }
 
-
+        //quotient times $denominator/divisor will get back orignal.
+        //this is idea for math , but for computer , it will not get
+        //exact orignal value.but smaller than orignal value.
         $m = bcmul($simpleResult, $denominator, $this->scale);
-        $remainderStr = bcsub($this->getValue(), $m, $this->scale);
-
+        
+        //$this->getValue() is orginal value
+        //find different between orignal value and actual value.
+         
+        
         /****
          * if scale is 2, then remainder is 0.xx,2 decimal
          * if scale is 3, then remainder is 0.xxx, 3 decimal
@@ -115,10 +125,13 @@ abstract class Money
 
         $midvalue = doubleval($remainderStr);
         $remainder = ($midvalue * $multiply);
-
+        
+        //we can only conpensate $remainder number of result. 
         for ($i=0; $i < $remainder; $i++) {
+            //compensate result
             $result[$i] = $result[$i]->add(new $class(1/$multiply));
         }
+        
         return $result;
     }
 

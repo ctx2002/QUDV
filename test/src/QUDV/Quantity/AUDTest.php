@@ -102,15 +102,15 @@ class AUDTest extends \PHPUnit_Framework_TestCase
      */
     public function testDivideAndSpread()
     {
-        $result = $this->object->divideAndSpread(133);
-
+        $aud = new AUD("13");
+        $result = $aud->divideAndSpread(15);
         $total = new AUD(0);
         foreach ($result as $value) {
             $init = $value->add($total);
             $total = $init;
         }
 
-        $this->assertEquals("5.12", $total->getValue());
+        $this->assertEquals("13.00", $total->getValue());
     }
 
     public function testCompare()
