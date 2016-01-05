@@ -106,7 +106,7 @@ abstract class Money
         //this is idea for math , but for computer , it will not get
         //exact orignal value.but smaller than orignal value.
         $m = bcmul($simpleResult, $denominator, $this->scale);
-        
+        $remainderStr = bcsub($this->getValue(), $m, $this->scale);
         //$this->getValue() is orginal value
         //find different between orignal value and actual value.
          
