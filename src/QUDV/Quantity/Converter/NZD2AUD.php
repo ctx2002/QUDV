@@ -3,6 +3,10 @@ namespace QUDV\Quantity\Converter;
 
 use QUDV\Quantity\Converter\Converter;
 use QUDV\Quantity\NZD;
+
+/**
+ this conversion is wrong, we have not consider QuantityKind yet
+***/
 class NZD2AUD extends Converter
 {
     private $conversion;
