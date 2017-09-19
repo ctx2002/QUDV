@@ -1,13 +1,13 @@
 <?php
 namespace QUDV\Quantity\Converter;
 use QUDV\Quantity\Converter\Converter;
-use QUDV\Quantity\NZD;
+use QUDV\Quantity\NZ\NZCent;
 
 class NZCent2NZDollar extends Converter
 {
     private $conversion;
-    public function __construct(NZD $nzd) {
-        $this->conversion = $nzd;
+    public function __construct(NZCent $nzcent) {
+        $this->conversion = $nzcent;
     }
     public function factor()
     {
@@ -15,11 +15,11 @@ class NZCent2NZDollar extends Converter
     }
     public function scale()
     {
-        return 3;
+        return 2;
     }
     public function convert()
     {
         $v = bcdiv($this->conversion->getValue(),$this->factor(),$this->scale());
-        return new \QUDV\Quantity\NZD($v);
+        return new \QUDV\Quantity\NZ\NZD($v);
     }
 }

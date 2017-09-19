@@ -8,7 +8,7 @@ class NZD extends Money
      * **/
     public function unit()
     {
-        return new \QUDV\Unit\NZD();
+        return new \QUDV\Unit\NZ\NZD();
     }
     /**
      * @return  \QUDV\QuantityKind\Money

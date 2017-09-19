@@ -124,9 +124,12 @@ abstract class Money
         }
 
         $midvalue = doubleval($remainderStr);
-        $remainder = ($midvalue * $multiply);
+        $remainder = intval($midvalue * $multiply);
         
         //we can only conpensate $remainder number of result. 
+		//remainer will never bigger than size of result, this is
+		//because remainer always smaller than $denominator.
+		//size of result is same as $denominator
         for ($i=0; $i < $remainder; $i++) {
             //compensate result
             $result[$i] = $result[$i]->add(new $class(1/$multiply));
