@@ -1,6 +1,6 @@
 <?php namespace QUDV\Quantity;
-
-abstract class Money
+use QUDV\IQuantity;
+abstract class Money implements IQuantity
 {
 
     /**
@@ -41,10 +41,6 @@ abstract class Money
         return "{value: [" . $this->getValue() . " ] , unit: [" . $this->unit()->id() . "],"
                 . "quantity kind: [" . $this->quantityKind()->id() . "]}";
     }
-
-    abstract public function unit();
-
-    abstract public function quantityKind();
 
     protected function calculate($value, Money $otherMoney)
     {

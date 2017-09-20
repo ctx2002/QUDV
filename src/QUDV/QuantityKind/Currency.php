@@ -10,7 +10,7 @@ class Currency implements IQuantityKind
         return "c";
     }
     public function description() {
-        return "";
+        return "currency";
     }
     public function id() {
         return $this->symbol().$this->name();
