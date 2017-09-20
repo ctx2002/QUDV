@@ -19,7 +19,7 @@ class AUD implements IUnit {
     }
 
     public function description(){
-        return "";
+        return "australia dollar";
     }
     
 }
