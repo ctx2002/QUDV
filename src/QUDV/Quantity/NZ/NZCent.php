@@ -8,13 +8,13 @@ class NZCent extends Money
      * **/
     public function unit()
     {
-        return new \QUDV\Unit\NZ\NZCent();
+        return new \QUDV\Unit\Cent();
     }
     /**
      * @return  \QUDV\QuantityKind\Currency
      * **/
     public function quantityKind()
     {
-        return new \QUDV\QuantityKind\Currency();
+        return new \QUDV\QuantityKind\NZCent();
     }
 }

@@ -8,13 +8,13 @@ class NZD extends Money
      * **/
     public function unit()
     {
-        return new \QUDV\Unit\NZ\NZD();
+        return new \QUDV\Unit\Dollar();
     }
     /**
      * @return  \QUDV\QuantityKind\Currency
      * **/
     public function quantityKind()
     {
-        return new \QUDV\QuantityKind\Currency();
+        return new \QUDV\QuantityKind\NZD();
     }
 }
