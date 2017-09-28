@@ -1,6 +1,6 @@
 <?php
 namespace QUDV\Quantity;
-
+use QUDV\QUDV\Quantity\Money;
 class NZD extends Money
 {
     /**

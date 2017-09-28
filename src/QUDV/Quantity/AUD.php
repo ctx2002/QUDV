@@ -1,6 +1,7 @@
 <?php
 
 namespace QUDV\Quantity;
+use QUDV\QUDV\Quantity\Money;
 
 class AUD extends Money {
 
