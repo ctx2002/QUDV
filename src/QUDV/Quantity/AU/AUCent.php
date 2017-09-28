@@ -1,17 +1,16 @@
 <?php
-
 namespace QUDV\Quantity;
 use QUDV\QUDV\Quantity\Money;
 
-class AUD extends Money {
+class AUCent extends Money {
 
     public function unit()
     {
-        return new \QUDV\Unit\AUD();
+        return new \QUDV\Unit\Cent();
     }
 
     public function quantityKind()
     {
-        return new \QUDV\QuantityKind\Currency();
+        return new \QUDV\QuantityKind\AUCent();
     }
 }

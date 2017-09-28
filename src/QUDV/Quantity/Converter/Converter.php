@@ -14,12 +14,4 @@ abstract class Converter
     public function __construct(IQuantity $q) {
         $this->conversion = $q;
     }
-	
-	/**
-	   @return boolean
-	**/
-	public function isConverableTo(IQuantity $quantity)
-	{
-		return $quantity->quantityKind()->same($this->conversion->quantityKind());
-	}
 }

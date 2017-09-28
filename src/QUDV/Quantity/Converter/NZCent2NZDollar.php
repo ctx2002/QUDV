@@ -2,10 +2,16 @@
 namespace QUDV\Quantity\Converter;
 use QUDV\Quantity\Converter\Converter;
 use QUDV\Exception\NotSameQuantityKind;
+use QUDV\Quantity\NZ\NZD;
 
 class NZCent2NZDollar extends Converter
 {
-    public function factor()
+    
+	public function __construct(NZD $q) {
+        parent::__construct($q);
+    }
+	
+	public function factor()
     {
         return 100
     }
@@ -20,11 +26,7 @@ class NZCent2NZDollar extends Converter
 	**/
     public function convert()
     {
-        if ( $this->isConverableTo(new \QUDV\Quantity\NZ\NZD() )) {
-		    $v = bcdiv($this->conversion->getValue(),$this->factor(),$this->scale());
-            return new \QUDV\Quantity\NZ\NZD($v);
-		}
-		
-		throw new NotSameQuantityKind($this->conversion, new \QUDV\Quantity\NZ\NZD());
+		$v = bcdiv($this->conversion->getValue(),$this->factor(),$this->scale());
+        return new \QUDV\Quantity\NZ\NZD($v);
     }
 }
