@@ -22,10 +22,7 @@ class NZD2AUD extends Converter
 	**/
     public function convert()
     {
-        if ( $this->isConverableTo(new \QUDV\Quantity\AUD() )) {
-			$v = bcmul($this->factor(), $this->conversion->getValue(),$this->scale());
-			return new \QUDV\Quantity\AUD($v);
-		}
-		throw new NotSameQuantityKind($this->conversion, new \QUDV\Quantity\AUD());
+        $v = bcmul($this->factor(), $this->conversion->getValue(),$this->scale());
+		return new \QUDV\Quantity\AUD($v);
     }
 }
