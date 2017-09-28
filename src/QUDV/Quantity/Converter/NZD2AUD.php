@@ -2,12 +2,15 @@
 namespace QUDV\Quantity\Converter;
 
 use QUDV\Quantity\Converter\Converter;
-use QUDV\Quantity\NZD;
+use QUDV\Quantity\NZ\NZD;
 use QUDV\Exception\NotSameQuantityKind;
 
 class NZD2AUD extends Converter
 {
-    public function factor()
+    public function __construct(NZD $q) {
+        parent::__construct($q);
+    }
+	public function factor()
     {
         return 0.9;
     }
